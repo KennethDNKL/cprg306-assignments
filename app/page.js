@@ -9,7 +9,10 @@ export default function Home() {
       <StudentInfo/>
       <p>
       <Link href="/week2">week 2</Link> 
-      </p>     
+      </p>
+      <p>
+      <Link href="/week3">week 3</Link> 
+      </p>   
       </div>
     </main>
   )
