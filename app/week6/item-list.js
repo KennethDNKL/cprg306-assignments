@@ -35,27 +35,35 @@ export default function ItemList({items}) {
 
   return (
     <div>
-      <label for="sort">Sort by: </label>
-      <button onClick={() => {
-          handleButtonClick('name');
-        }}
-        className={`${nameButtonColor} p-1 m-2 w-28`} >Name</button>
-      <button onClick={() => {
-          handleButtonClick('category');
-        }}
-        className={`${categoryButtonColor} p-1 m-2 w-28`}>Category</button>
-
-      <ul>
-        {sortedItems.map((item) => (
+    <label htmlFor="sort">Sort by: </label>
+    <button onClick={() => {
+        handleButtonClick('name');
+      }}
+      id="sort"
+      className={`${nameButtonColor} p-1 m-2 w-28`}
+    >
+      Name
+    </button>
+    <button onClick={() => {
+        handleButtonClick('category');
+      }}
+      className={`${categoryButtonColor} p-1 m-2 w-28`}
+    >
+      Category
+    </button>
+  
+    <ul>
+      {sortedItems.map((item) => (
+        <li key={item.id}>
           <Item
-            key={item.id} // Use a unique key prop, assuming there's an 'id' property
             name={item.name}
             quantity={item.quantity}
             category={item.category}
           />
-        ))}
-      </ul>
-    </div>
+        </li>
+      ))}
+    </ul>
+  </div>
   );
 }
 
