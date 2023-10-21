@@ -40,13 +40,13 @@ export default function NewItem() {
       };
 
       return (
-        <main class="flex justify-center w-full">
+        <main class ="flex justify-center w-full">
             
-            <form class ="p-2 m-4 bg-slate-900 text-black max-w-sm w-full 1"
+            <form className="p-2 m-4 bg-slate-900 text-black max-w-sm w-full 1"
              onSubmit={handleSubmit}>
-            <label class="mb-2">
+            <label class ="mb-2">
                 <input
-                    required class="w-full mt-1 border-2 border-gray-300 p-2 rounded-lg font-sans"
+                    required class ="w-full mt-1 border-2 border-gray-300 p-2 rounded-lg font-sans"
                     type="text"
                     placeholder="Item name"
                     onChange={handleNameChange}
@@ -66,7 +66,7 @@ export default function NewItem() {
                                 />
                             </div>
                         
-            <select class="ml-1 border-2 border-gray-300 p-2 rounded-lg font-sans"
+            <select class ="ml-1 border-2 border-gray-300 p-2 rounded-lg font-sans"
                     onChange={handleCategoryChange} 
                     value={category}>
                 
