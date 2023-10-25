@@ -22,6 +22,9 @@ export default function Home() {
       <p>
       <Link href="/week6">week 6</Link> 
       </p>  
+      <p>
+      <Link href="/week7">week 7</Link> 
+      </p>  
       </div>
       <div data-lt-installed={true}>
           {/* Content */}
