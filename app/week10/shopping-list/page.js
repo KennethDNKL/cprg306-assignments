@@ -1,39 +1,58 @@
 "use client";
-import React, { useState } from 'react';
 import ItemList from './item-list';
 import NewItem from './new-item';
 import MealIdeas from './meal-ideas';
-import itemsData from './items.json';
+import { getItems, addItem } from "../_services/shopping-list-service";
+import React, { useState, useEffect } from "react";
+import { useUserAuth } from "../_utils/auth-context";
+
+
 
 export default function Page() {
-  const [items, setItems] = useState(itemsData);
-  const [selectedItemName, setSelectedItemName] = useState('');
+  const { user } = useUserAuth();
+  const [items, setItems] = useState([]);
+  const [selectedItemName, setSelectedItemName] = useState(null);
 
-  const handleAddItem = (newItem) => {
-    setItems([...items, newItem]);
+  const handleAddItem = async (item) => {
+    try {
+      const newItemId = await addItem(user.uid, item);
+      const newItem = { ...item, id: newItemId };
+      setItems([...items, newItem]);
+    } catch (error) {
+      console.error("Error adding item:", error);
+    }
   };
 
-  function handleMealSelect(mealId) {
-    console.log('mealId: ' + mealId);
-    setSelectedItemId(mealId);
+
+  async function loadItems() {
+    try {
+      const items = await getItems(user.uid);
+      setItems(items);
+    } catch (error) {
+      console.error('Error loading items:', error);
+    }
   }
+
+  useEffect(() => {
+  loadItems();
+  }, [user]);
 
   function handleItemSelect(itemName) {
     const cleanItemName = itemName.split(" ")[0].split(",")[0];
     setSelectedItemName(cleanItemName);
 
   }
-
   
   function onClickSort(itemsSorted) {
     setItems(itemsSorted);
   }
 
   function handleMealSelect(mealId) {
+    console.log('mealId: ' + mealId);
     setSelectedItemId(mealId);
   }
 
-    return (
+  return (
       <main className="bg-slate-950 p-2 m-2">
         <h2 className="text-3xl font-bold mb-4">Shopping List</h2>
         <div className="flex">
