@@ -6,7 +6,7 @@ export async function getItems(userId) {
     const q = query(collection(db, "users", userId, "items"));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
-      items.push({ id: doc.id, data: doc.data() });
+      items.push({ id: doc.id, ...doc.data() });
     });
     return items;
   }

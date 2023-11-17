@@ -11,7 +11,9 @@ import { useUserAuth } from "../_utils/auth-context";
 export default function Page() {
   const { user } = useUserAuth();
   const [items, setItems] = useState([]);
-  const [selectedItemName, setSelectedItemName] = useState(null);
+  const [selectedItemName, setSelectedItemName] = useState('');
+  const [selectedItemId, setSelectedItemId] = useState('');
+ 
 
   const handleAddItem = async (item) => {
     try {
@@ -26,7 +28,10 @@ export default function Page() {
 
   async function loadItems() {
     try {
+      console.log("get items")
+      if (!user) return;
       const items = await getItems(user.uid);
+      console.log('items: ' + JSON.stringify(items));
       setItems(items);
     } catch (error) {
       console.error('Error loading items:', error);
@@ -37,12 +42,11 @@ export default function Page() {
   loadItems();
   }, [user]);
 
-  function handleItemSelect(itemName) {
-    const cleanItemName = itemName.split(" ")[0].split(",")[0];
-    setSelectedItemName(cleanItemName);
-
-  }
   
+  const handleItemSelect = (itemName) => {
+    setSelectedItemName(itemName);
+  };
+
   function onClickSort(itemsSorted) {
     setItems(itemsSorted);
   }

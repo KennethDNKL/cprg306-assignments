@@ -21,7 +21,6 @@ export default function Page() {
   function handleItemSelect(itemName) {
     const cleanItemName = itemName.split(" ")[0].split(",")[0];
     setSelectedItemName(cleanItemName);
-
   }
 
   
